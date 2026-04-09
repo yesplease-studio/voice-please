@@ -1,3 +1,5 @@
+<img width="1584" height="396" alt="Github-voice-please" src="https://github.com/user-attachments/assets/282bb773-70c3-481d-a2ac-659654020a96" />
+
 # voice-please
 
 An open-source, AI-native framework for defining, encoding, and maintaining a company's voice and language system.
