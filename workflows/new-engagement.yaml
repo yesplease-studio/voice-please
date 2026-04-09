@@ -1,0 +1,66 @@
+# Voice System — New Engagement
+#
+# The standard flow for building a voice system from scratch.
+# Produces: voice-profile.md, conventions.md, and optionally
+# register-map.md + audience-language-bank.md + ai-voice-config.md.
+
+name: new-engagement
+description: >
+  Full voice system creation flow. Discovery surfaces the company's real voice,
+  voice-author builds the artifacts, and voice-encode translates them for AI tools.
+
+steps:
+  - id: discover
+    skill: voice-discover
+    purpose: >
+      Audit existing content, interview for reference voices and anti-references,
+      assess all 8 dimensions, and produce a Discovery Brief.
+    input: Content samples, website URL, brand docs, or verbal context from the user.
+    output: voice/discovery-brief.md
+    notes: >
+      If the user arrives with rich context and clear voice direction, this step
+      can be abbreviated. But don't skip it entirely for new engagements -- even
+      a fast discovery surfaces patterns the user hasn't articulated.
+
+  - id: author
+    skill: voice-author
+    depends_on: [discover]
+    purpose: >
+      Create the core voice system artifacts from the Discovery Brief.
+    input: voice/discovery-brief.md
+    output:
+      - voice/voice-profile.md
+      - voice/conventions.md
+      - voice/register-map.md (if registers are relevant)
+      - voice/audience-language-bank.md (if audience data exists)
+    gate: human-approval
+    notes: >
+      Present each artifact for review before saving. The user's taste and
+      judgment are critical here -- especially on voice attributes, reference
+      voice synthesis, and convention rules.
+
+  - id: encode
+    skill: voice-encode
+    depends_on: [author]
+    purpose: >
+      Translate the approved voice artifacts into AI-ready configurations.
+    input:
+      - voice/voice-profile.md
+      - voice/conventions.md
+      - voice/register-map.md (if exists)
+    output: voice/ai-voice-config.md
+    notes: >
+      Optional but recommended. If the company uses AI tools for content
+      generation, encoding is what makes the voice system operational
+      rather than aspirational.
+
+# Expected timeline:
+#   Discovery: 30-60 minutes (content analysis + interview)
+#   Authoring: 30-60 minutes (outline, confirm, write, review)
+#   Encoding: 15-30 minutes (systematic translation)
+#   Total: 1.5-2.5 hours for a complete voice system
+#
+# What comes after:
+#   - voice-audit periodically to check content against the system
+#   - voice-refresh when the company evolves
+#   - voice-encode again after any refresh

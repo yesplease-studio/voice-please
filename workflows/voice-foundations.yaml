@@ -1,0 +1,50 @@
+# Voice System — Foundations Only
+#
+# A lightweight flow for companies that need voice identity and conventions
+# but don't need the full system (registers, audience language, AI encoding) yet.
+# Produces: voice-profile.md and conventions.md.
+
+name: voice-foundations
+description: >
+  Minimal voice system creation. Discovery surfaces the company's real voice,
+  voice-author builds the two core artifacts. Good for companies that want
+  to start small and expand later.
+
+steps:
+  - id: discover
+    skill: voice-discover
+    purpose: >
+      Audit existing content, interview for reference voices and anti-references,
+      assess dimensions 1-2 in depth (identity and conventions).
+    input: Content samples, website URL, brand docs, or verbal context.
+    output: voice/discovery-brief.md
+    notes: >
+      For foundations-only, the discovery interview can focus on Dims 1-2
+      (Voice Identity and Writing Conventions) and touch Dims 3-4 lightly.
+      Don't skip discovery entirely -- even a short version prevents
+      voice-author from inventing attributes without evidence.
+
+  - id: author
+    skill: voice-author
+    depends_on: [discover]
+    purpose: >
+      Create voice-profile.md and conventions.md from the Discovery Brief.
+    input: voice/discovery-brief.md
+    output:
+      - voice/voice-profile.md
+      - voice/conventions.md
+    gate: human-approval
+    notes: >
+      Only produce these two artifacts. Don't create register-map.md or
+      audience-language-bank.md unless the discovery naturally surfaced
+      enough material for them.
+
+# Expected timeline:
+#   Discovery: 20-40 minutes (focused on Dims 1-2)
+#   Authoring: 20-30 minutes (two artifacts)
+#   Total: 40-70 minutes
+#
+# What comes after:
+#   - Use the voice system for a few weeks
+#   - Run voice-audit to see how it's holding up
+#   - Expand to full system (registers, audience language, AI encoding) when ready

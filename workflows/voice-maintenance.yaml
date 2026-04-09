@@ -1,0 +1,73 @@
+# Voice System — Maintenance Cycle
+#
+# The ongoing loop for keeping a voice system current.
+# Run periodically (every 3-6 months) or when triggered by
+# content quality concerns or company evolution.
+
+name: voice-maintenance
+description: >
+  Audit content against the voice system, propose amendments for drift
+  or evolution, apply approved changes, and re-encode for AI tools.
+
+steps:
+  - id: audit
+    skill: voice-audit
+    purpose: >
+      Evaluate recent content against the defined voice system.
+      Score dimensions, identify drift, and produce an audit report.
+    input: 5-10 recent content samples across channels.
+    output: Audit report (presented in conversation, not saved as artifact).
+    notes: >
+      Collect content from the last 1-3 months. Include samples from
+      multiple channels and authors if applicable. The audit report
+      drives the refresh step.
+
+  - id: refresh
+    skill: voice-refresh
+    depends_on: [audit]
+    purpose: >
+      Propose targeted amendments based on audit findings and any
+      company evolution since the last update.
+    input: Audit report + user context on what's changed.
+    output: Refresh report with prioritized amendment proposals.
+    gate: human-approval
+    notes: >
+      Present each amendment proposal for approval. The user may
+      approve all, approve some, or reject amendments with reasons.
+      Rejected amendments are noted to prevent re-proposal.
+
+  - id: apply
+    skill: voice-author
+    depends_on: [refresh]
+    purpose: >
+      Apply approved amendments to voice artifacts.
+    input: Approved amendment proposals from refresh report.
+    output: Updated voice artifacts in voice/.
+    gate: human-approval
+    notes: >
+      voice-author runs in edit mode. Show before/after for each
+      change. Confirm each artifact update individually.
+
+  - id: re-encode
+    skill: voice-encode
+    depends_on: [apply]
+    purpose: >
+      Update AI configurations to reflect the refreshed voice system.
+    input: Updated voice artifacts.
+    output: Updated voice/ai-voice-config.md.
+    notes: >
+      Only needed if ai-voice-config.md exists. If the company
+      hasn't set up AI encoding yet, skip this step or offer to
+      set it up now.
+
+# Expected timeline:
+#   Audit: 15-30 minutes (depends on number of samples)
+#   Refresh: 15-30 minutes (depends on number of amendments)
+#   Apply: 10-20 minutes (targeted edits, not full rewrite)
+#   Re-encode: 10-15 minutes (incremental update)
+#   Total: 50-95 minutes
+#
+# Recommended cadence:
+#   - Every 3 months for fast-moving companies (rapid growth, new channels)
+#   - Every 6 months for stable companies
+#   - Immediately after major changes (rebrand, new product, new market)
