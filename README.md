@@ -115,7 +115,7 @@ voice-please/
 
 ## The please family
 
-voice-please is one of four open-source frameworks:
+voice-please is one of five open-source frameworks:
 
 | Framework | What it does | Core question |
 |-----------|-------------|---------------|
@@ -123,8 +123,9 @@ voice-please is one of four open-source frameworks:
 | [prd-please](https://github.com/yesplease-studio/prd-please) | Product requirements authoring and validation | "How do we build it reliably?" |
 | [sales-please](https://github.com/yesplease-studio/sales-please) | Deal qualification and pipeline management | "Is this deal worth pursuing?" |
 | **voice-please** | Voice system definition and encoding | "What should we sound like?" |
+| [design-please](https://github.com/yesplease-studio/design-please) | Design direction and Claude Design encoding | "What should it look like, feel like, and act like?" |
 
-Each framework is standalone. They share design patterns (AI-native, human-gated, structured artifacts) but operate independently.
+Each framework is standalone. They share design patterns (AI-native, human-gated, structured artifacts) but operate independently. voice-please and design-please are siblings — voice operationalizes how the company sounds; design operationalizes how it looks, feels, and behaves.
 
 ## Self-serve vs. facilitated
 
